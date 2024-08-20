@@ -12,7 +12,6 @@ const typeDefs = `
     pickNumber: Int!
     playerName: String!
     playerPosition: String!
-    teamName: String!
     score: Int
   }
 
@@ -41,7 +40,7 @@ const typeDefs = `
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addEntry(userId: ID!, pickNumber: Int!, playerName: String!, playerPosition: String!, teamName: String!): Entry
+    addEntry(userId: ID!, pickNumber: Int!, playerName: String!, playerPosition: String!,): Entry
     addDraftResult(pickNumber: Int!, playerName: String!, playerPosition: String!, teamName: String!): DraftResult
     login(email: String!, password: String!): Auth  
   }

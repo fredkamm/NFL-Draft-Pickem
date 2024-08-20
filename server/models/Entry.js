@@ -19,10 +19,6 @@ const entrySchema = new Schema({
     type: String,
     required: true,
   },
-  teamName: {
-    type: String,
-    required: true,
-  },
   score: {
     type: Number,
     default: 0,

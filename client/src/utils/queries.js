@@ -12,7 +12,6 @@ export const QUERY_ME = gql`
         pickNumber
         playerName
         playerPosition
-        teamName
         score
       }
     }
@@ -31,7 +30,6 @@ export const QUERY_USERS = gql`
         pickNumber
         playerName
         playerPosition
-        teamName
         score
       }
     }
@@ -50,7 +48,6 @@ export const QUERY_USER = gql`
         pickNumber
         playerName
         playerPosition
-        teamName
         score
       }
     }
@@ -65,7 +62,6 @@ export const QUERY_ENTRIES = gql`
       pickNumber
       playerName
       playerPosition
-      teamName
       score
     }
   }
@@ -79,7 +75,6 @@ export const QUERY_ENTRY = gql`
       pickNumber
       playerName
       playerPosition
-      teamName
       score
       user {
         _id

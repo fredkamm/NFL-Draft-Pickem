@@ -28,26 +28,24 @@ export const ADD_USER = gql`
 
 // Add entry
 export const ADD_ENTRY = gql`
-  mutation AddEntry($userId: ID!, $pickNumber: Int!, $playerName: String!, $playerPosition: String!, $teamName: String!) {
-    addEntry(userId: $userId, pickNumber: $pickNumber, playerName: $playerName, playerPosition: $playerPosition, teamName: $teamName) {
+  mutation AddEntry($userId: ID!, $pickNumber: Int!, $playerName: String!, $playerPosition: String!) {
+    addEntry(userId: $userId, pickNumber: $pickNumber, playerName: $playerName, playerPosition: $playerPosition) {
       _id
       pickNumber
       playerName
       playerPosition
-      teamName
     }
   }
 `;
 
 // Update entry
 export const UPDATE_ENTRY = gql`
-  mutation UpdateEntry($id: ID!, $pickNumber: Int!, $playerName: String!, $playerPosition: String!, $teamName: String!) {
-    updateEntry(id: $id, pickNumber: $pickNumber, playerName: $playerName, playerPosition: $playerPosition, teamName: $teamName) {
+  mutation UpdateEntry($id: ID!, $pickNumber: Int!, $playerName: String!, $playerPosition: String!) {
+    updateEntry(id: $id, pickNumber: $pickNumber, playerName: $playerName, playerPosition: $playerPosition) {
       _id
       pickNumber
       playerName
       playerPosition
-      teamName
     }
   }
 `;
@@ -60,7 +58,6 @@ export const DELETE_ENTRY = gql`
       pickNumber
       playerName
       playerPosition
-      teamName
     }
   }
 `;
