@@ -21,11 +21,30 @@ const resolvers = {
     draftResult: async (_, { id }) => {
       return DraftResult.findById(id);
     },
+    me: async (_, args, context) => {
+      if (context.user) {
+        return User.findOne({_id: context.user._id}).populate("entries");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    }
   },
+
   Mutation: {
     addUser: async (_, { username, email, password }) => {
       const user = new User({ username, email, password });
       return user.save();
+    },
+    login: async (_, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const token = signToken(user);
+      return { token, user };
     },
     addEntry: async (
       _,
@@ -53,11 +72,13 @@ const resolvers = {
       return draftResult.save();
     },
   },
+
   User: {
     entries: async (user) => {
       return Entry.find({ user: user._id });
     },
   },
+
   Entry: {
     user: async (entry) => {
       return User.findById(entry.user);

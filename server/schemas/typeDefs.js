@@ -36,6 +36,7 @@ const typeDefs = `
     entry(id: ID!): Entry
     draftResults: [DraftResult]
     draftResult(id: ID!): DraftResult
+    me: User
   }
 
   type Mutation {
