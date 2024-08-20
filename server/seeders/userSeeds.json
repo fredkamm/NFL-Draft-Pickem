@@ -1,0 +1,44 @@
+[
+  {
+    "username": "user1",
+    "email": "user1@example.com",
+    "password": "password123",
+    "entries": [
+      {
+        "pickNumber": 1,
+        "playerName": "Player One",
+        "playerPosition": "QB",
+        "teamName": "Team A",
+        "score": 0
+      },
+      {
+        "pickNumber": 2,
+        "playerName": "Player Two",
+        "playerPosition": "WR",
+        "teamName": "Team B",
+        "score": 0
+      }
+    ]
+  },
+  {
+    "username": "user2",
+    "email": "user2@example.com",
+    "password": "password123",
+    "entries": [
+      {
+        "pickNumber": 1,
+        "playerName": "Player Three",
+        "playerPosition": "RB",
+        "teamName": "Team C",
+        "score": 0
+      },
+      {
+        "pickNumber": 2,
+        "playerName": "Player Four",
+        "playerPosition": "TE",
+        "teamName": "Team D",
+        "score": 0
+      }
+    ]
+  }
+]

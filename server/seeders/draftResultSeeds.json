@@ -1,0 +1,63 @@
+[
+    {
+      "pickNumber": 1,
+      "playerName": "Bryce Young",
+      "playerPosition": "QB",
+      "teamName": "Carolina Panthers"
+    },
+    {
+      "pickNumber": 2,
+      "playerName": "C.J. Stroud",
+      "playerPosition": "QB",
+      "teamName": "Houston Texans"
+    },
+    {
+      "pickNumber": 3,
+      "playerName": "Will Anderson Jr.",
+      "playerPosition": "OLB",
+      "teamName": "Arizona Cardinals"
+    },
+    {
+      "pickNumber": 4,
+      "playerName": "Jalen Carter",
+      "playerPosition": "DT",
+      "teamName": "Philadelphia Eagles"
+    },
+    {
+      "pickNumber": 5,
+      "playerName": "Tyree Wilson",
+      "playerPosition": "DE",
+      "teamName": "Detroit Lions"
+    },
+    {
+      "pickNumber": 6,
+      "playerName": "Christian Gonzalez",
+      "playerPosition": "CB",
+      "teamName": "New England Patriots"
+    },
+    {
+      "pickNumber": 7,
+      "playerName": "Devon Witherspoon",
+      "playerPosition": "CB",
+      "teamName": "Las Vegas Raiders"
+    },
+    {
+      "pickNumber": 8,
+      "playerName": "Peter Skoronski",
+      "playerPosition": "OL",
+      "teamName": "Atlanta Falcons"
+    },
+    {
+      "pickNumber": 9,
+      "playerName": "Paris Johnson Jr.",
+      "playerPosition": "OL",
+      "teamName": "Chicago Bears"
+    },
+    {
+      "pickNumber": 10,
+      "playerName": "Broderick Jones",
+      "playerPosition": "OL",
+      "teamName": "Tennessee Titans"
+    }
+  ]
+  
