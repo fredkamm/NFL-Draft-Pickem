@@ -21,18 +21,20 @@ const resolvers = {
     draftResult: async (_, { id }) => {
       return DraftResult.findById(id);
     },
-    me: async (_, args, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({_id: context.user._id}).populate("entries");
+        const userData = await User.findOne({ _id: context.user._id });
+        return userData;
       }
-      throw new AuthenticationError("You need to be logged in!");
-    }
+      return null;
+    },
   },
 
   Mutation: {
     addUser: async (_, { username, email, password }) => {
-      const user = new User({ username, email, password });
-      return user.save();
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });

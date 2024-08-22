@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Error from './pages/Error';
 import Entries from './pages/Entries.jsx';
+import Admin from './pages/Admin.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,9 @@ const router = createBrowserRouter([
       }, {
         path: '/entries/:username',
         element: <Entries />
+      }, {
+        path: '/secret',
+        element: <Admin />
       }
     ]
   }
