@@ -9,24 +9,24 @@ const resolvers = {
     user: async (_, { username }) => {
       return User.findOne({ username }).populate("entries");
     },
-    entries: async () => {
-      return Entry.find().populate("user");
+    entries: async (parent, { year }) => {
+      return Entry.find({ year }).populate("user");
     },
     entry: async (_, { id }) => {
       return Entry.findById(id).populate("user");
     },
-    draftResults: async () => {
-      return DraftResult.find();
+    draftResults: async (parent, { year }) => {
+      return DraftResult.find({ year });
     },
     draftResult: async (_, { id }) => {
       return DraftResult.findById(id);
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id });
+        const userData = await User.findOne({ _id: context.user._id }).populate('entries');
         return userData;
       }
-      return null;
+      throw new AuthenticationError('Not logged in');
     },
   },
 
@@ -48,30 +48,43 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addEntry: async (
-      _,
-      { userId, pickNumber, playerName, playerPosition, teamName }
-    ) => {
-      const entry = new Entry({
-        user: userId,
-        pickNumber,
-        playerName,
-        playerPosition,
-        teamName,
-      });
-      return entry.save();
+    addEntry: async (_, { year, picks }, context) => {
+      if (context.user) {
+        const entry = await Entry.create({
+          user: context.user._id,
+          year,
+          picks,
+        });
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { entries: entry._id },
+        });
+        return entry;
+      }
+      throw new AuthenticationError('Not logged in');
     },
-    addDraftResult: async (
-      _,
-      { pickNumber, playerName, playerPosition, teamName }
-    ) => {
-      const draftResult = new DraftResult({
-        pickNumber,
-        playerName,
-        playerPosition,
-        teamName,
+    addDraftResult: async (_, { year, picks }) => {
+      const draftResult = await DraftResult.create({
+        year,
+        picks,
       });
-      return draftResult.save();
+      return draftResult;
+    },
+    scoreEntry: async (_, { entryId }) => {
+      const entry = await Entry.findById(entryId);
+      const draftResult = await DraftResult.findOne({ year: entry.year });
+
+      let score = 0;
+      for (const pick of entry.picks) {
+        const correctPick = draftResult.picks.find(
+          (draftPick) => draftPick.pickNumber === pick.pickNumber && draftPick.playerName === pick.playerName
+        );
+        if (correctPick) {
+          score++;
+        }
+      }
+
+      entry.score = score;
+      return entry.save();
     },
   },
 

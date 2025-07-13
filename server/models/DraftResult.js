@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const draftResultSchema = new Schema({
+const pickSchema = new Schema({
     pickNumber: {
         type: Number,
         required: true,
@@ -17,6 +17,14 @@ const draftResultSchema = new Schema({
         type: String,
         required: true,
     },
+});
+
+const draftResultSchema = new Schema({
+    year: {
+        type: Number,
+        required: true,
+    },
+    picks: [pickSchema],
 });
 
 const DraftResult = model('DraftResult', draftResultSchema);

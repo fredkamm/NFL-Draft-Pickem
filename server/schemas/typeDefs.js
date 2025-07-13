@@ -6,21 +6,35 @@ const typeDefs = `
     entries: [Entry]
   }
 
+  type Pick {
+    pickNumber: Int!
+    playerName: String!
+  }
+
+  input PickInput {
+    pickNumber: Int!
+    playerName: String!
+  }
+
   type Entry {
     _id: ID!
     user: User!
-    pickNumber: Int!
-    playerName: String!
-    playerPosition: String!
+    year: Int!
+    picks: [Pick]
     score: Int
   }
 
-  type DraftResult {
-    _id: ID!
+  type DraftPick {
     pickNumber: Int!
     playerName: String!
     playerPosition: String!
     teamName: String!
+  }
+
+  type DraftResult {
+    _id: ID!
+    year: Int!
+    picks: [DraftPick]
   }
 
   type Auth {
@@ -31,18 +45,26 @@ const typeDefs = `
   type Query {
     users: [User]
     user(username: String!): User
-    entries: [Entry]
+    entries(year: Int!): [Entry]
     entry(id: ID!): Entry
-    draftResults: [DraftResult]
+    draftResults(year: Int!): [DraftResult]
     draftResult(id: ID!): DraftResult
     me: User
   }
 
+  type DraftPickInput {
+    pickNumber: Int!
+    playerName: String!
+    playerPosition: String!
+    teamName: String!
+  }
+
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addEntry(userId: ID!, pickNumber: Int!, playerName: String!, playerPosition: String!,): Entry
-    addDraftResult(pickNumber: Int!, playerName: String!, playerPosition: String!, teamName: String!): DraftResult
-    login(email: String!, password: String!): Auth  
+    addEntry(year: Int!, picks: [PickInput]!): Entry
+    addDraftResult(year: Int!, picks: [DraftPickInput]!): DraftResult
+    scoreEntry(entryId: ID!): Entry
+    login(email: String!, password: String!): Auth
   }
 `;
 
