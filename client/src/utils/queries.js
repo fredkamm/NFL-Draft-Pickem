@@ -1,7 +1,6 @@
 import { gql } from "@apollo/client";
 
-// Get user profile
-export const QUERY_ME = gql`
+export const GET_ME = gql`
   query Me {
     me {
       _id
@@ -9,16 +8,17 @@ export const QUERY_ME = gql`
       email
       entries {
         _id
-        pickNumber
-        playerName
-        playerPosition
+        year
+        picks {
+          pickNumber
+          playerName
+        }
         score
       }
     }
   }
 `;
 
-// Get all users
 export const QUERY_USERS = gql`
   query Users {
     users {
@@ -27,16 +27,17 @@ export const QUERY_USERS = gql`
       email
       entries {
         _id
-        pickNumber
-        playerName
-        playerPosition
+        year
+        picks {
+          pickNumber
+          playerName
+        }
         score
       }
     }
   }
 `;
 
-// Get a single user
 export const QUERY_USER = gql`
   query User($username: String!) {
     user(username: $username) {
@@ -45,36 +46,40 @@ export const QUERY_USER = gql`
       email
       entries {
         _id
-        pickNumber
-        playerName
-        playerPosition
+        year
+        picks {
+          pickNumber
+          playerName
+        }
         score
       }
     }
   }
 `;
 
-// Get all entries
 export const QUERY_ENTRIES = gql`
-  query Entries {
-    entries {
+  query Entries($year: Int!) {
+    entries(year: $year) {
       _id
-      pickNumber
-      playerName
-      playerPosition
+      year
+      picks {
+        pickNumber
+        playerName
+      }
       score
     }
   }
 `;
- 
-// Get a single entry
+
 export const QUERY_ENTRY = gql`
-  query Entry($id: Int!) {
+  query Entry($id: ID!) {
     entry(id: $id) {
       _id
-      pickNumber
-      playerName
-      playerPosition
+      year
+      picks {
+        pickNumber
+        playerName
+      }
       score
       user {
         _id
@@ -84,10 +89,9 @@ export const QUERY_ENTRY = gql`
   }
 `;
 
-// Get all draft results
 export const QUERY_DRAFT_RESULTS = gql`
-  query DraftResults {
-    draftResults {
+  query DraftResults($year: Int!) {
+    draftResults(year: $year) {
       _id
       pickNumber
       playerName
@@ -97,9 +101,8 @@ export const QUERY_DRAFT_RESULTS = gql`
   }
 `;
 
-// Get a single draft result by ID
 export const QUERY_DRAFT_RESULT = gql`
-  query DraftResult($id: Int!) {
+  query DraftResult($id: ID!) {
     draftResult(id: $id) {
       _id
       pickNumber

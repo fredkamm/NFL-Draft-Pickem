@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import DraftBoard from '../components/Draftboard';
 
-function Home() {
+const Home = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <h1>NFL Draft {currentYear}</h1>
+      <DraftBoard year={currentYear} />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
